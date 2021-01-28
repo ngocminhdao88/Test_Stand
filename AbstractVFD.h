@@ -1,0 +1,4 @@
+#ifndef ABSTRACTVFD_H
+#define ABSTRACTVFD_H
+
+#endif // ABSTRACTVFD_H
