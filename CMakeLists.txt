@@ -39,9 +39,9 @@ else()
     mainwindow.cpp
     mainwindow.h
     mainwindow.ui
-    abstractvfd.h
     error.cpp
     error.h
+    serialsettings.ui
   )
 endif()
 
