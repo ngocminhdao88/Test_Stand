@@ -2,7 +2,9 @@
 #define UNICOVFD_H
 
 #include <QObject>
+#include <QModbusClient>
 #include "interfaces/ivfd.h"
+#include "fixedpointnumber.h"
 
 
 class UnicoVFD : public QObject, public iVFD
@@ -20,6 +22,10 @@ public:
     const int FWD_MOTION_STS_R = 415; //0->CCW, 1->CW
     const int SERIAL_MODE_R = 427; //0->Hold, 1->CW, 2->CCW
 
+    //Getter, setter
+    QModbusClient *modbusClient() const;
+    void setModbusClient(QModbusClient *modbusClient);
+
 signals:
 
     // iVFD interface
@@ -34,6 +40,9 @@ private:
     //Calculate a fixed point number for Unico VFD
     //do i need a seperate class for this conversion?
     int calFixNumber(double value);
+
+private:
+    QModbusClient *m_modbusClient;
 };
 
 #endif // UNICOVFD_H

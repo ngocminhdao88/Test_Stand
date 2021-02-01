@@ -25,6 +25,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 #endif()
 
 find_package(Qt5 COMPONENTS Widgets REQUIRED)
+find_package(Qt5 COMPONENTS SerialBus REQUIRED)
 
 if(ANDROID)
   add_library(Test_Stand SHARED
@@ -45,7 +46,10 @@ else()
     interfaces/ivfd.h
     unicovfd.cpp
     unicovfd.h
+    fixedpointnumber.cpp
+    fixedpointnumber.h
   )
 endif()
 
 target_link_libraries(Test_Stand PRIVATE Qt5::Widgets)
+target_link_libraries(Test_Stand PRIVATE Qt5::SerialBus)
