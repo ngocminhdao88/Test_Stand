@@ -42,6 +42,9 @@ else()
     error.cpp
     error.h
     serialsettings.ui
+    interfaces/ivfd.h
+    unicovfd.cpp
+    unicovfd.h
   )
 endif()
 

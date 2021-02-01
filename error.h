@@ -8,18 +8,18 @@ class Error
 public:
     Error(bool status, int code, std::string source);
 
-    /**
-     * @brief Indicates if an error has occured (TRUE = error, FALSE = no error)
+    /*!
+     * \brief Indicates if an error has occured (TRUE = error, FALSE = no error)
      */
     bool status();
 
-    /**
-     * @brief Return an error code
+    /*!
+     * \brief Return an error code
      */
     int code();
 
-    /**
-     * @brief Retrun an error message
+    /*!
+     * \brief Retrun an error message
      */
     std::string source();
 

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>188</width>
-    <height>279</height>
+    <height>278</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -30,19 +30,19 @@
          </widget>
         </item>
         <item row="3" column="1">
-         <widget class="QComboBox" name="baudrateCbx"/>
+         <widget class="QComboBox" name="cbxBaudRate"/>
         </item>
         <item row="4" column="1">
-         <widget class="QComboBox" name="databitCbx"/>
+         <widget class="QComboBox" name="cbxDataBit"/>
         </item>
         <item row="0" column="1">
-         <widget class="QComboBox" name="portCbx"/>
+         <widget class="QComboBox" name="cbxPort"/>
         </item>
         <item row="1" column="1" rowspan="2">
-         <widget class="QComboBox" name="parityCbx"/>
+         <widget class="QComboBox" name="cbxParity"/>
         </item>
         <item row="5" column="1">
-         <widget class="QComboBox" name="stopbitCbx"/>
+         <widget class="QComboBox" name="cbxStopBit"/>
         </item>
         <item row="4" column="0">
          <widget class="QLabel" name="label_3">
@@ -66,7 +66,7 @@
          </widget>
         </item>
         <item row="0" column="0">
-         <widget class="QPushButton" name="portBtn">
+         <widget class="QPushButton" name="btnPort">
           <property name="text">
            <string>Port</string>
           </property>
@@ -87,7 +87,7 @@
       </widget>
      </item>
      <item row="0" column="1">
-      <widget class="QSpinBox" name="timeoutSpinBox"/>
+      <widget class="QSpinBox" name="spbTimeout"/>
      </item>
      <item row="0" column="0">
       <widget class="QLabel" name="label_5">
@@ -97,7 +97,7 @@
       </widget>
      </item>
      <item row="1" column="1">
-      <widget class="QSpinBox" name="retrySpinBox"/>
+      <widget class="QSpinBox" name="spbRetries"/>
      </item>
     </layout>
    </item>
@@ -115,7 +115,7 @@
     </spacer>
    </item>
    <item>
-    <widget class="QPushButton" name="applyBtn">
+    <widget class="QPushButton" name="btnApply">
      <property name="text">
       <string>Apply</string>
      </property>
