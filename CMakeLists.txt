@@ -26,6 +26,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(Qt5 COMPONENTS Widgets REQUIRED)
 find_package(Qt5 COMPONENTS SerialBus REQUIRED)
+find_package(Qt5 COMPONENTS SerialPort REQUIRED)
 
 if(ANDROID)
   add_library(Test_Stand SHARED
@@ -55,3 +56,4 @@ endif()
 
 target_link_libraries(Test_Stand PRIVATE Qt5::Widgets)
 target_link_libraries(Test_Stand PRIVATE Qt5::SerialBus)
+target_link_libraries(Test_Stand PRIVATE Qt5::SerialPort)
