@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="vfdTab">
      <attribute name="title">
@@ -33,33 +33,6 @@
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
        <layout class="QGridLayout" name="gridLayout">
-        <item row="4" column="0" colspan="2">
-         <widget class="QLabel" name="label_2">
-          <property name="text">
-           <string>Current Speed</string>
-          </property>
-         </widget>
-        </item>
-        <item row="5" column="2">
-         <widget class="QSpinBox" name="spbDirection"/>
-        </item>
-        <item row="3" column="2">
-         <widget class="QDoubleSpinBox" name="spbSetSpeed">
-          <property name="buttonSymbols">
-           <enum>QAbstractSpinBox::UpDownArrows</enum>
-          </property>
-          <property name="maximum">
-           <double>7000.000000000000000</double>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="0">
-         <widget class="QLabel" name="label">
-          <property name="text">
-           <string>Speed:</string>
-          </property>
-         </widget>
-        </item>
         <item row="0" column="1" colspan="2">
          <widget class="QPushButton" name="btnConnectVFD">
           <property name="text">
@@ -67,7 +40,7 @@
           </property>
          </widget>
         </item>
-        <item row="4" column="2">
+        <item row="3" column="2">
          <widget class="QDoubleSpinBox" name="spbSpeed">
           <property name="frame">
            <bool>true</bool>
@@ -86,27 +59,44 @@
           </property>
          </widget>
         </item>
-        <item row="0" column="0">
-         <widget class="QPushButton" name="btnConfigVFD">
-          <property name="text">
-           <string>Config</string>
-          </property>
-         </widget>
+        <item row="4" column="2">
+         <widget class="QSpinBox" name="spbDirection"/>
         </item>
-        <item row="5" column="0">
+        <item row="4" column="0">
          <widget class="QLabel" name="label_3">
           <property name="text">
            <string>Direction</string>
           </property>
          </widget>
         </item>
-        <item row="1" column="0" colspan="3">
-         <widget class="QPushButton" name="btnEnableVFD">
+        <item row="3" column="0" colspan="2">
+         <widget class="QLabel" name="label_2">
           <property name="text">
-           <string>Enable</string>
+           <string>Current Speed</string>
           </property>
-          <property name="flat">
-           <bool>false</bool>
+         </widget>
+        </item>
+        <item row="2" column="2">
+         <widget class="QDoubleSpinBox" name="spbSetSpeed">
+          <property name="buttonSymbols">
+           <enum>QAbstractSpinBox::UpDownArrows</enum>
+          </property>
+          <property name="maximum">
+           <double>7000.000000000000000</double>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="label">
+          <property name="text">
+           <string>Speed:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QPushButton" name="btnConfigVFD">
+          <property name="text">
+           <string>Config</string>
           </property>
          </widget>
         </item>

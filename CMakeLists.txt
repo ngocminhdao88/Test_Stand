@@ -42,6 +42,8 @@ else()
     mainwindow.ui
     error.cpp
     error.h
+    serialsettings.cpp
+    serialsettings.h
     serialsettings.ui
     interfaces/ivfd.h
     unicovfd.cpp
