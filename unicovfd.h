@@ -37,10 +37,6 @@ private:
     void initDevice() override;
     void configDevice() override;
 
-    //Calculate a fixed point number for Unico VFD
-    //do i need a seperate class for this conversion?
-    int calFixNumber(double value);
-
 private:
     QModbusClient *m_modbusClient;
 };

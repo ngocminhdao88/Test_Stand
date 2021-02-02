@@ -14,23 +14,17 @@ void UnicoVFD::setSpeed(double speed)
 
     if(speed < 0) return;
 
-    int fixSpeed = calFixNumber(speed);
+    FixedPointNumber fp(10);
+    int fixSpeed = fp.toFixedPointNumber(speed);
 
     auto data = QModbusDataUnit(QModbusDataUnit::HoldingRegisters,
                                 JOG_VEL_R,
                                 QVector<quint16>() << fixSpeed);
     if(auto *reply = modbusClient()->sendWriteRequest(data, 1)) {
-        if(reply->isFinished()) {
-            //TODO: do something with reply;
-            //connect(reply, &QModbusReply::finished, this, &UnicoVFD::onReadReady);
-        } else {
-            //reply return immediately
-            reply->deleteLater();
-        }
+        reply->deleteLater();
     } else {
-        //TODO: error when sending write request. Do something about it
-        //modbusClient()->error();
-        //modbusClient()->errorString();
+        //error occured
+        emit modbusClient()->errorOccurred(modbusClient()->error());
     }
 }
 
@@ -51,7 +45,8 @@ double UnicoVFD::speed()
         auto result = reply->result();
         if(result.isValid()) {
             speed = result.value(0);
-            speed = speed / 10;
+            FixedPointNumber fp(10);
+            speed = fp.fromFixedPointNumber(speed);
         }
 
         reply->deleteLater();
@@ -74,17 +69,10 @@ void UnicoVFD::setDirection(int direction)
 
     auto data = QModbusDataUnit(QModbusDataUnit::HoldingRegisters,
                                 SERIAL_MODE_R,
-                                QVector<quint16>() << direction
-                                );
+                                QVector<quint16>() << direction);
 
     if(auto *reply = modbusClient()->sendWriteRequest(data, 1)) {
-        if(reply->isFinished()) {
-            //TODO: do something with reply;
-            //connect(reply, &QModbusReply::finished, this, &UnicoVFD::onReadReady);
-        } else {
-            //reply return immediately
-            reply->deleteLater();
-        }
+        reply->deleteLater();
     } else {
         //TODO: error when sending write request. Do something about it
     }
@@ -103,15 +91,19 @@ int UnicoVFD::direction()
                                 1);
 
     if(auto *reply = modbusClient()->sendReadRequest(data, 1)) {
-        if(reply->isFinished()) {
-            //TODO: do something with reply;
-            //connect(reply, &QModbusReply::finished, this, &UnicoVFD::onReadReady);
-        } else {
-            //reply return immediately
-            reply->deleteLater();
+        while(!reply->isFinished());
+
+        auto result = reply->result();
+        if(result.isValid()) {
+            auto temp = result.value(0);
+            FixedPointNumber fp(10);
+            direction = (int)(fp.fromFixedPointNumber(temp));
         }
+
+        reply->deleteLater();
     } else {
-        //TODO: error when sending write request. Do something about it
+        //error occured
+        emit modbusClient()->errorOccurred(modbusClient()->error());
     }
 
     return direction;
@@ -123,11 +115,6 @@ void UnicoVFD::initDevice()
 
 void UnicoVFD::configDevice()
 {
-}
-
-int UnicoVFD::calFixNumber(double value)
-{
-    return (int)(value * 10);
 }
 
 QModbusClient *UnicoVFD::modbusClient() const
