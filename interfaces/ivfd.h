@@ -3,6 +3,7 @@
 
 class iVFD
 {
+public:
     virtual void setSpeed(double speed) = 0;
     virtual double speed() = 0;
 

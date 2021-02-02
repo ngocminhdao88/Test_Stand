@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QModbusClient>
 #include "serialsettingsdialog.h"
+#include "interfaces/ivfd.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -21,6 +22,10 @@ public:
     void setModbusClient(QModbusClient *modbusClient);
 
     SerialSettingsDialog *serialSettingsDialog() const;
+
+    iVFD *vfdDevice() const;
+
+    void setVfdDevice(iVFD *vfdDevice);
 
 private:
     /*!
@@ -49,5 +54,6 @@ private:
     Ui::MainWindow *ui;
     QModbusClient *m_modbusClient;
     SerialSettingsDialog *m_serialSettingsDialog;
+    iVFD *m_vfdDevice;
 };
 #endif // MAINWINDOW_H

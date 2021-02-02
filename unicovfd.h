@@ -26,10 +26,7 @@ public:
     QModbusClient *modbusClient() const;
     void setModbusClient(QModbusClient *modbusClient);
 
-signals:
-
     // iVFD interface
-private:
     void setSpeed(double speed) override;
     double speed() override;
     void setDirection(int direction) override;

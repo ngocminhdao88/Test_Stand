@@ -1,15 +1,19 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
 #include <QModbusRtuSerialMaster>
+#include "unicovfd.h"
 
 MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)
-    , ui(new Ui::MainWindow),
+    : QMainWindow(parent) ,
+      ui(new Ui::MainWindow),
       m_serialSettingsDialog(new SerialSettingsDialog(this))
 {
     ui->setupUi(this);
 
     setModbusClient(new QModbusRtuSerialMaster(this));
+    setVfdDevice(new UnicoVFD(this));
+    //TODO: how to set modbus device to this Unico VFD???
+    //can i do it using the constructor???
 
     if(modbusClient()) {
         //change the state of modbus device
@@ -98,12 +102,24 @@ void MainWindow::onConfigVFDClicked()
 
 void MainWindow::onSpeedChanged(double speed)
 {
-    //send the speed command to the VFD
+    if(!vfdDevice()) return;
+    vfdDevice()->setSpeed(speed);
 }
 
 void MainWindow::onDirectionChanged(int direction)
 {
-    //send the direction command to the VFD
+    if(!vfdDevice()) return;
+    vfdDevice()->setSpeed(direction);
+}
+
+void MainWindow::setVfdDevice(iVFD *vfdDevice)
+{
+    m_vfdDevice = vfdDevice;
+}
+
+iVFD *MainWindow::vfdDevice() const
+{
+    return m_vfdDevice;
 }
 
 SerialSettingsDialog *MainWindow::serialSettingsDialog() const
