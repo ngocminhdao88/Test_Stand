@@ -3,7 +3,7 @@
 
 #include <QMainWindow>
 #include <QModbusClient>
-#include <QModbusRtuSerialMaster>
+#include "serialsettingsdialog.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -20,14 +20,34 @@ public:
     QModbusClient *modbusClient() const;
     void setModbusClient(QModbusClient *modbusClient);
 
+    SerialSettingsDialog *serialSettingsDialog() const;
+
 private:
     /*!
-     * \brief Setup the Modbus connection
+     * \brief Open a connection to ModbusRTU device
      */
     void onConnectVFDClicked();
+
+    /*!
+     * \brief Setup parameters for the ModbusRTU connection
+     */
+    void onConfigVFDClicked();
+
+    /*!
+     * \brief Change VFD speed
+     */
+    void onSpeedChanged(double speed);
+
+    /*!
+     * \brief Change VFD direction
+     */
+    void onDirectionChanged(int direction);
+
+
 
 private:
     Ui::MainWindow *ui;
     QModbusClient *m_modbusClient;
+    SerialSettingsDialog *m_serialSettingsDialog;
 };
 #endif // MAINWINDOW_H

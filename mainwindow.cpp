@@ -1,9 +1,11 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
+#include <QModbusRtuSerialMaster>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
+    , ui(new Ui::MainWindow),
+      m_serialSettingsDialog(new SerialSettingsDialog(this))
 {
     ui->setupUi(this);
 
@@ -19,6 +21,9 @@ MainWindow::MainWindow(QWidget *parent)
 
     //SIGNALS->SLOTS on UI
     connect(ui->btnConnectVFD, &QPushButton::clicked, this, &MainWindow::onConnectVFDClicked);
+    connect(ui->btnConfigVFD, &QPushButton::clicked, this, &MainWindow::onConfigVFDClicked);
+    connect(ui->sbxSpeed, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this, &MainWindow::onSpeedChanged);
+    connect(ui->sbxDirection, QOverload<int>::of(&QSpinBox::valueChanged), this, &MainWindow::onDirectionChanged);
 }
 
 MainWindow::~MainWindow()
@@ -40,31 +45,32 @@ void MainWindow::setModbusClient(QModbusClient *modbusClient)
 void MainWindow::onConnectVFDClicked()
 {
     if(!modbusClient()) return;
+    if(!serialSettingsDialog()) return;
 
     //device is not connected yet
     if(modbusClient()->state() != QModbusDevice::ConnectedState) {
         //setup connection parameter
         modbusClient()->setConnectionParameter(
                     QModbusDevice::SerialPortNameParameter,
-                    "COM3");
+                    serialSettingsDialog()->parameters().portName);
         modbusClient()->setConnectionParameter(
                     QModbusDevice::SerialParityParameter,
-                    0);
+                    serialSettingsDialog()->parameters().parity);
         modbusClient()->setConnectionParameter(
                     QModbusDevice::SerialBaudRateParameter,
-                    9600);
+                    serialSettingsDialog()->parameters().baud);
         modbusClient()->setConnectionParameter(
                     QModbusDevice::SerialDataBitsParameter,
-                    8);
+                    SerialSettingsDialog().parameters().databits);
         modbusClient()->setConnectionParameter(
                     QModbusDevice::SerialStopBitsParameter,
-                    0);
-        //modbusClient()->setTimeout(10);
-        //modbusClient()->setNumberOfRetries(3);
+                    serialSettingsDialog()->parameters().stopbits);
+        modbusClient()->setTimeout(serialSettingsDialog()->parameters().timeout);
+        modbusClient()->setNumberOfRetries(serialSettingsDialog()->parameters().retry);
 
         //try to connect to the modbus device
         if(modbusClient()->connectDevice()) {
-            statusBar()->showMessage("Connected to device on: ");
+            statusBar()->showMessage(QString("Connected to device on: %1").arg(serialSettingsDialog()->parameters().portName));
         } else {
             statusBar()->showMessage(
                         QString("Connection failed: %1, %2").arg(QString::number(modbusClient()->error()), modbusClient()->errorString()));
@@ -73,7 +79,7 @@ void MainWindow::onConnectVFDClicked()
         //stop the VFD first
 
         modbusClient()->disconnectDevice();
-        statusBar()->showMessage("Disconnected to device on: ");
+        statusBar()->showMessage(QString("Disconnected to device on: %1").arg(serialSettingsDialog()->parameters().portName));
     }
 
     //change the button description depends on modbus state
@@ -82,4 +88,25 @@ void MainWindow::onConnectVFDClicked()
     } else {
         ui->btnConnectVFD->setText("Connect");
     }
+}
+
+void MainWindow::onConfigVFDClicked()
+{
+    if(!serialSettingsDialog()) return;
+    serialSettingsDialog()->show();
+}
+
+void MainWindow::onSpeedChanged(double speed)
+{
+    //send the speed command to the VFD
+}
+
+void MainWindow::onDirectionChanged(int direction)
+{
+    //send the direction command to the VFD
+}
+
+SerialSettingsDialog *MainWindow::serialSettingsDialog() const
+{
+    return m_serialSettingsDialog;
 }

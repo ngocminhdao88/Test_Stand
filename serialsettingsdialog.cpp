@@ -1,10 +1,10 @@
-#include "ui_serialsettings.h"
-#include "serialsettings.h"
+#include "ui_serialsettingsdialog.h"
+#include "serialsettingsdialog.h"
 #include <QSerialPortInfo>
 
-SerialSettings::SerialSettings(QWidget *parent)
+SerialSettingsDialog::SerialSettingsDialog(QWidget *parent)
     : QDialog(parent),
-      ui(new Ui::SerialSettings)
+      ui(new Ui::SerialSettingsDialog)
 {
     ui->setupUi(this);
 
@@ -41,12 +41,12 @@ SerialSettings::SerialSettings(QWidget *parent)
     });
 }
 
-SerialSettings::~SerialSettings()
+SerialSettingsDialog::~SerialSettingsDialog()
 {
     delete ui;
 }
 
-SerialSettings::Parameters SerialSettings::parameters() const
+SerialSettingsDialog::Parameters SerialSettingsDialog::parameters() const
 {
     return m_parameters;
 }

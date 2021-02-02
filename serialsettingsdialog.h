@@ -7,16 +7,16 @@
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
-class SerialSettings;
+class SerialSettingsDialog;
 }
 QT_END_NAMESPACE
 
-class SerialSettings : public QDialog
+class SerialSettingsDialog : public QDialog
 {
     Q_OBJECT
 public:
-    SerialSettings(QWidget *parent = 0);
-    ~SerialSettings();
+    SerialSettingsDialog(QWidget *parent = 0);
+    ~SerialSettingsDialog();
 
     struct Parameters {
         QString portName = "";
@@ -32,7 +32,7 @@ public:
 
 private:
     Parameters m_parameters;
-    Ui::SerialSettings *ui;
+    Ui::SerialSettingsDialog *ui;
 };
 
 #endif // SERIALSETTINGS_H

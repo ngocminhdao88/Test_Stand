@@ -41,11 +41,11 @@ else()
     mainwindow.cpp
     mainwindow.h
     mainwindow.ui
+    serialsettingsdialog.cpp
+    serialsettingsdialog.h
+    serialsettingsdialog.ui
     error.cpp
     error.h
-    serialsettings.cpp
-    serialsettings.h
-    serialsettings.ui
     interfaces/ivfd.h
     unicovfd.cpp
     unicovfd.h
