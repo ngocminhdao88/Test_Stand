@@ -1,7 +1,10 @@
 #include "unicovfd.h"
-#include <QEventLoop>
 
 UnicoVFD::UnicoVFD(QObject *parent) : QObject(parent)
+{
+}
+
+UnicoVFD::~UnicoVFD()
 {
 }
 
@@ -75,6 +78,7 @@ void UnicoVFD::setDirection(int direction)
         reply->deleteLater();
     } else {
         //TODO: error when sending write request. Do something about it
+        emit modbusClient()->errorOccurred(modbusClient()->error());
     }
 }
 

@@ -18,14 +18,7 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-    QModbusClient *modbusClient() const;
-    void setModbusClient(QModbusClient *modbusClient);
-
     SerialSettingsDialog *serialSettingsDialog() const;
-
-    iVFD *vfdDevice() const;
-
-    void setVfdDevice(iVFD *vfdDevice);
 
 private:
     /*!
@@ -51,9 +44,9 @@ private:
 
 
 private:
-    Ui::MainWindow *ui;
-    QModbusClient *m_modbusClient;
-    SerialSettingsDialog *m_serialSettingsDialog;
-    iVFD *m_vfdDevice;
+    Ui::MainWindow *ui = 0;
+    QModbusClient *m_modbusClient = 0;
+    SerialSettingsDialog *m_serialSettingsDialog = 0;
+    iVFD *m_vfdDevice = 0;
 };
 #endif // MAINWINDOW_H

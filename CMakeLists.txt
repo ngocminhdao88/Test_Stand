@@ -47,10 +47,13 @@ else()
     error.cpp
     error.h
     interfaces/ivfd.h
+    interfaces/ilogger.h
     unicovfd.cpp
     unicovfd.h
     fixedpointnumber.cpp
     fixedpointnumber.h
+    errorlogger.cpp
+    errorlogger.h
   )
 endif()
 

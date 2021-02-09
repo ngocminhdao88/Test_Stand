@@ -12,6 +12,7 @@ class UnicoVFD : public QObject, public iVFD
     Q_OBJECT
 public:
     explicit UnicoVFD(QObject *parent = nullptr);
+    ~UnicoVFD();
 
     //Unico 805244 register
     const int JOG_VEL_R = 84; //set speed
