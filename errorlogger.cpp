@@ -11,6 +11,7 @@ void ErrorLogger::write(QString message)
     QFile logfile("error.log");
     if(logfile.open(QIODevice::Append)) {
         QTextStream stream(&logfile);
-        stream << QString("%1: %2").arg(QTime::currentTime().toString(), message);
+        stream << QString("%1: %2\n").arg(QTime::currentTime().toString(), message);
     }
+    logfile.close();
 }
