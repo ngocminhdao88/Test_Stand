@@ -3,6 +3,9 @@
 
 #include <QMainWindow>
 #include <QModbusClient>
+#include <QDesktopServices>
+#include <QUrl>
+#include <QFile>
 #include "serialsettingsdialog.h"
 #include "interfaces/ivfd.h"
 
@@ -41,6 +44,10 @@ private:
      */
     void onDirectionChanged(int direction);
 
+    /*!
+     * \brief Open error log
+     */
+    void viewErrorLog();
 
 
 private:

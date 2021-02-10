@@ -20,6 +20,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->btnConfigVFD, &QPushButton::clicked, this, &MainWindow::onConfigVFDClicked);
     connect(ui->sbxSpeed, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this, &MainWindow::onSpeedChanged);
     connect(ui->sbxDirection, QOverload<int>::of(&QSpinBox::valueChanged), this, &MainWindow::onDirectionChanged);
+
+    connect(ui->actionViewErrorLog, &QAction::triggered, this, &MainWindow::viewErrorLog);
 }
 
 MainWindow::~MainWindow()
@@ -92,6 +94,14 @@ void MainWindow::onSpeedChanged(double speed)
 void MainWindow::onDirectionChanged(int direction)
 {
     //set the motor turn direction
+}
+
+void MainWindow::viewErrorLog()
+{
+    QFile errorLog("error.log");
+    if(!errorLog.exists()) return;
+
+    QDesktopServices::openUrl(QUrl("error.log"));
 }
 
 SerialSettingsDialog *MainWindow::serialSettingsDialog() const
