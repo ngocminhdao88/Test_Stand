@@ -11,7 +11,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     //TODO: how to set modbus device to this Unico VFD???
     //can i do it using the constructor???
-    m_serialSettingsDialog = new SerialSettingsDialog(this);
+    m_modbusRtuSettingsDialog = new ModbusRtuSettingsDialog(this);
     m_modbusClient = new QModbusRtuSerialMaster(this);
     m_vfdDevice = new UnicoVFD(this);
 
@@ -28,7 +28,7 @@ MainWindow::~MainWindow()
 {
     delete ui;
     delete m_modbusClient;
-    delete m_serialSettingsDialog;
+    delete m_modbusRtuSettingsDialog;
     delete m_vfdDevice;
 }
 
@@ -51,7 +51,7 @@ void MainWindow::onConnectVFDClicked()
                     serialSettingsDialog()->parameters().baud);
         m_modbusClient->setConnectionParameter(
                     QModbusDevice::SerialDataBitsParameter,
-                    SerialSettingsDialog().parameters().databits);
+                    ModbusRtuSettingsDialog().parameters().databits);
         m_modbusClient->setConnectionParameter(
                     QModbusDevice::SerialStopBitsParameter,
                     serialSettingsDialog()->parameters().stopbits);
@@ -104,7 +104,7 @@ void MainWindow::viewErrorLog()
     QDesktopServices::openUrl(QUrl("error.log"));
 }
 
-SerialSettingsDialog *MainWindow::serialSettingsDialog() const
+ModbusRtuSettingsDialog *MainWindow::serialSettingsDialog() const
 {
-    return m_serialSettingsDialog;
+    return m_modbusRtuSettingsDialog;
 }

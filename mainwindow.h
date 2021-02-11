@@ -6,7 +6,7 @@
 #include <QDesktopServices>
 #include <QUrl>
 #include <QFile>
-#include "serialsettingsdialog.h"
+#include "modbusrtusettingsdialog.h"
 #include "interfaces/ivfd.h"
 
 QT_BEGIN_NAMESPACE
@@ -21,7 +21,7 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-    SerialSettingsDialog *serialSettingsDialog() const;
+    ModbusRtuSettingsDialog *serialSettingsDialog() const;
 
 private:
     /*!
@@ -53,7 +53,7 @@ private:
 private:
     Ui::MainWindow *ui = 0;
     QModbusClient *m_modbusClient = 0;
-    SerialSettingsDialog *m_serialSettingsDialog = 0;
+    ModbusRtuSettingsDialog *m_modbusRtuSettingsDialog = 0;
     iVFD *m_vfdDevice = 0;
 };
 #endif // MAINWINDOW_H

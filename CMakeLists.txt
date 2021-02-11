@@ -41,9 +41,9 @@ else()
     mainwindow.cpp
     mainwindow.h
     mainwindow.ui
-    serialsettingsdialog.cpp
-    serialsettingsdialog.h
-    serialsettingsdialog.ui
+    modbusrtusettingsdialog.cpp
+    modbusrtusettingsdialog.h
+    modbusrtusettingsdialog.ui
     error.cpp
     error.h
     interfaces/ivfd.h
