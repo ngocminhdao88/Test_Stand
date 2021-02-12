@@ -24,6 +24,7 @@ signals:
     // iLogger interface
 public:
     void write(QString message) override;
+
 };
 
 #endif // ERRORLOGGER_H
