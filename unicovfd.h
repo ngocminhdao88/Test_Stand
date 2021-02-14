@@ -3,8 +3,11 @@
 
 #include <QObject>
 #include <QModbusClient>
+#include <QModbusRtuSerialMaster>
 #include "interfaces/ivfd.h"
 #include "fixedpointnumber.h"
+#include "unicovfdconfigdialog.h"
+#include "errorlogger.h"
 
 
 class UnicoVFD : public QObject, public iVFD
@@ -23,10 +26,6 @@ public:
     const int FWD_MOTION_STS_R = 415; //0->CCW, 1->CW
     const int SERIAL_MODE_R = 427; //0->Hold, 1->CW, 2->CCW
 
-    //Getter, setter
-    QModbusClient *modbusClient() const;
-    void setModbusClient(QModbusClient *modbusClient);
-
     // iVFD interface
     void setSpeed(double speed) override;
     double speed() override;
@@ -34,9 +33,22 @@ public:
     int direction() override;
     void initDevice() override;
     void configDevice() override;
+    bool connectDevice() override;
+    void disconnectDevice() override;
+    iVFD::State state() override;
+
+    //TODO: using modbus async api
+
+private slots:
+    void errorOccured(QModbusDevice::Error error);
 
 private:
-    QModbusClient *m_modbusClient;
+    UnicoVfdConfigDialog *m_configDialog = 0;
+    QModbusClient *m_modbusDevice = 0;
+    iVFD::State m_state;
+    int m_deviceID;
+
+
 };
 
 #endif // UNICOVFD_H

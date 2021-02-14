@@ -7,6 +7,7 @@
 
 #include <QObject>
 #include <QTime>
+#include <QDateTime>
 #include <QFile>
 #include <QTextStream>
 

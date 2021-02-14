@@ -14,7 +14,7 @@ void ErrorLogger::write(QString message)
 	    return;
     }
 	QTextStream stream(&logfile);
-	stream << QString("%1: %2\r\n").arg(QTime::currentTime().toString(), message);
+    stream << QString("%1: %2\r\n").arg(QDateTime::currentDateTime().toString(), message);
 
     logfile.close();
 }

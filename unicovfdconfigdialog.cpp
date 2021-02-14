@@ -1,24 +1,12 @@
-#include "ui_modbusrtusettingsdialog.h"
-#include "modbusrtusettingsdialog.h"
+#include "ui_unicovfdconfigdialog.h"
+#include "unicovfdconfigdialog.h"
 #include <QSerialPortInfo>
 
-ModbusRtuSettingsDialog::ModbusRtuSettingsDialog(QWidget *parent)
+UnicoVfdConfigDialog::UnicoVfdConfigDialog(QWidget *parent)
     : QDialog(parent),
-      ui(new Ui::ModbusRtuSettingsDialog)
+      ui(new Ui::UnicoVfdConfigDialog)
 {
     ui->setupUi(this);
-
-    //initiate the default settings
-    m_parameters = {
-        "", //portname
-        0, //parity
-        9600, //baud
-        8, //databits
-        1, //stopbits
-        1, //id
-        100, //timeout
-        3, //retry
-    };
 
     //setup UI with default values
     ui->cbxParity->setCurrentIndex(QSerialPort::NoParity);
@@ -48,7 +36,7 @@ ModbusRtuSettingsDialog::ModbusRtuSettingsDialog(QWidget *parent)
         m_parameters.baud = ui->cbxBaudrate->currentText().toInt();
         m_parameters.databits = ui->cbxDatabits->currentText().toInt();
         m_parameters.stopbits = ui->cbxStopbits->currentText().toInt();
-        m_parameters.id = ui->spxDeviceID->value();
+        m_parameters.deviceid = ui->spxDeviceID->value();
         m_parameters.timeout = ui->spxTimeout->value();
         m_parameters.retry = ui->spxRetry->value();
 
@@ -56,12 +44,12 @@ ModbusRtuSettingsDialog::ModbusRtuSettingsDialog(QWidget *parent)
     });
 }
 
-ModbusRtuSettingsDialog::~ModbusRtuSettingsDialog()
+UnicoVfdConfigDialog::~UnicoVfdConfigDialog()
 {
     delete ui;
 }
 
-ModbusRtuSettingsDialog::Parameters ModbusRtuSettingsDialog::parameters() const
+UnicoVfdConfigDialog::Parameters UnicoVfdConfigDialog::parameters() const
 {
     return m_parameters;
 }

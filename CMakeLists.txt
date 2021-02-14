@@ -41,13 +41,13 @@ else()
     mainwindow.cpp
     mainwindow.h
     mainwindow.ui
-    modbusrtusettingsdialog.cpp
-    modbusrtusettingsdialog.h
-    modbusrtusettingsdialog.ui
     error.cpp
     error.h
     interfaces/ivfd.h
     interfaces/ilogger.h
+    unicovfdconfigdialog.cpp
+    unicovfdconfigdialog.h
+    unicovfdconfigdialog.ui
     unicovfd.cpp
     unicovfd.h
     fixedpointnumber.cpp
